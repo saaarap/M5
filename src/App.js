@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import MyNav from "./components/MyNav/MyNav";
+import MyFooter from "./components/MyFooter/MyFooter";
+import Welcome from "./components/Welcome/Welcome";
+import LatestRelease from "./components/LatestRelease/LatestRelease";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: "",
+          };
+  }
+
+  handleQueryChange = (newQuery) => {
+    this.setState({ query: newQuery });
+  };
+
+  render() {
+    const { query } = this.state;
+
+    return (
+      <div className="App">
+        <MyNav query={query} setQuery={this.handleQueryChange} />
+        <Welcome />
+        <LatestRelease searchQuery={query} />
+        <MyFooter />
+      </div>
+    );
+  }
 }
 
 export default App;
